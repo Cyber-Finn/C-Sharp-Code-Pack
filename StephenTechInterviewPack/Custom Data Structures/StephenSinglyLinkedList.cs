@@ -8,22 +8,27 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
 {
     internal class StephenSinglyLinkedList
     {
-        public Node Root;
+        private Node _Root;
+        private int _Size = 0;
 
         //doing the method like this allows us to call GetRoot, without using brackets "()", and lets us access the object returned directly (without making copies) since we use the Get modifier
-        public Node GetFirstElement { get { return Root; } }
+        public Node GetFirstElement { get { return _Root; } }
+        /// <summary>
+        /// returns the 1-based index size of the collection
+        /// </summary>
+        public int Size { get { return _Size; } }
 
         private Node GetLastNode
         {
             get
             {
-                if (Root == null)
+                if (_Root == null)
                     return null;
 
                 //doing an Else statement/check here takes up a clock-cycle, which adds latency.
                 //We know that the program will only ever reach this point if the Root node is not empty
 
-                Node node = Root;
+                Node node = _Root;
                 while (node.Next != null)
                 {
                     //move the node to the next node in the list
@@ -35,7 +40,7 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
 
         private Node FindPreceedingNode(object data)
         {
-            Node node = Root;
+            Node node = _Root;
             Node preceedingNode = new Node();
 
             while (node.Next != null)
@@ -56,26 +61,50 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
         {
             Node n = new Node { Data = data };
 
-            if (Root == null)
-                Root = n;
+            if (_Root == null)
+                _Root = n;
             else
                 GetLastNode.Next = n;
+
+            _Size++;
         }
 
+        /// <summary>
+        /// Returns the element at the specified index, returns null if the element does not exist.
+        /// </summary>
+        ///     <param name="target">the nth element to find. <br></br> eg. If 5 is passed in, we will find the 5th element</param>
+        /// <returns></returns>
+        public Node? GetElementAt(int target)
+        {
+            int count = 0;
+
+            Node node = _Root;
+
+            while (node.Next != null)
+            {
+                if(count == target)
+                    return node;
+
+                //move the node to the next node in the list
+                node = node.Next;
+                count++;
+            }
+            return null;
+        }
 
 
         public void DeleteElement(object data)
         {
-            if (Root.Data.Equals(data))
+            if (_Root.Data.Equals(data))
             {
-                if (Root.Next != null)
+                if (_Root.Next != null)
                 {
-                    Node oldRoot = Root;
-                    Root = oldRoot.Next;
+                    Node oldRoot = _Root;
+                    _Root = oldRoot.Next;
                 }
                 else
                 {
-                    Root = null;
+                    _Root = null;
                 }
                     
             }
@@ -87,7 +116,7 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
                 Node ne = n.Next.Next;
                 n.Next = ne;
             }
-
+            _Size--;
         }
 
         public class Node
