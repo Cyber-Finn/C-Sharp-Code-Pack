@@ -10,8 +10,8 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
     {
         public Node Root;
 
-        //doing the method like this allows us to call GetRoot, without using brackets "()" -> just looks a bit nicer
-        public Node GetRoot { get { return Root; } }
+        //doing the method like this allows us to call GetRoot, without using brackets "()", and lets us access the object returned directly (without making copies) since we use the Get modifier
+        public Node GetFirstElement { get { return Root; } }
 
         private Node GetLastNode
         {
@@ -33,7 +33,26 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
             }
         }
 
-        public void AddNode(object data)
+        private Node FindPreceedingNode(object data)
+        {
+            Node node = Root;
+            Node preceedingNode = new Node();
+
+            while (node.Next != null)
+            {
+                if (node.Next.Data.Equals(data))
+                {
+                    preceedingNode = node;
+                    break;
+                }
+
+                //move the node to the next node in the list
+                node = node.Next;
+            }
+            return preceedingNode;
+        }
+
+        public void AddElement(object data)
         {
             Node n = new Node { Data = data };
 
@@ -41,6 +60,34 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
                 Root = n;
             else
                 GetLastNode.Next = n;
+        }
+
+
+
+        public void DeleteElement(object data)
+        {
+            if (Root.Data.Equals(data))
+            {
+                if (Root.Next != null)
+                {
+                    Node oldRoot = Root;
+                    Root = oldRoot.Next;
+                }
+                else
+                {
+                    Root = null;
+                }
+                    
+            }
+                
+            else
+            {
+                //this will essentially erase the node we need to, by moving the rest of the list up by 1 position
+                Node n = FindPreceedingNode(data);
+                Node ne = n.Next.Next;
+                n.Next = ne;
+            }
+
         }
 
         public class Node
