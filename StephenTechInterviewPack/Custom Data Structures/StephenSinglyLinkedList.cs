@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StephenTechInterviewPack.Custom_Data_Structures
 {
-    internal class StephenSinglyLinkedList
+    public class StephenSinglyLinkedList
     {
         private Node _Root;
         private int _Size = 0;
