@@ -14,7 +14,7 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
         //doing the method like this allows us to call GetRoot, without using brackets "()", and lets us access the object returned directly (without making copies) since we use the Get modifier
         public Node GetFirstElement { get { return _Root; } }
         /// <summary>
-        /// returns the 1-based index size of the collection
+        /// returns the index size of the collection (Starts at 1, not 0)
         /// </summary>
         public int Size { get { return _Size; } }
 
@@ -23,7 +23,7 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
             get
             {
                 if (_Root == null)
-                    return null;
+                    return _Root; //we are intentionally passing back _Root - instead of Null, because it saves us the step of creating a new empty Node object (Which also saves some memory and clock-cycles)
 
                 //doing an Else statement/check here takes up a clock-cycle, which adds latency.
                 //We know that the program will only ever reach this point if the Root node is not empty
@@ -78,16 +78,19 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
         {
             int count = 0;
 
+            if((_Root == null) || (target <= 0))
+                return _Root;
+
             Node node = _Root;
 
             while (node.Next != null)
             {
-                if(count == target)
+                count++;
+                if (count == target)
                     return node;
 
                 //move the node to the next node in the list
                 node = node.Next;
-                count++;
             }
             return null;
         }
