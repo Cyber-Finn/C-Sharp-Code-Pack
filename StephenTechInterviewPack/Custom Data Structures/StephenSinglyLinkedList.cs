@@ -38,7 +38,7 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
             }
         }
 
-        private Node FindPreceedingNode(object data)
+        private Node GetPreviousNode(object data)
         {
             Node node = _Root;
             Node preceedingNode = new Node();
@@ -69,16 +69,42 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
             _Size++;
         }
 
+        public void DeleteElement(object data)
+        {
+            if (_Root.Data.Equals(data))
+            {
+                if (_Root.Next != null)
+                {
+                    Node oldRoot = _Root;
+                    _Root = oldRoot.Next;
+                }
+                else
+                {
+                    _Root = null;
+                }
+            }
+
+            else
+            {
+                //this will essentially erase the node we need to, by moving the rest of the list up by 1 position
+                Node n = GetPreviousNode(data);
+                Node ne = n.Next.Next;
+                n.Next = ne;
+            }
+            _Size--;
+        }
+
+
         /// <summary>
-        /// Returns the element at the specified index, returns null if the element does not exist.
+        /// Returns the element at the specified index, returns null if the element does not exist. (Starts at 1, not 0)
         /// </summary>
         ///     <param name="target">the nth element to find. <br></br> eg. If 5 is passed in, we will find the 5th element</param>
         /// <returns></returns>
         public Node? GetElementAt(int target)
         {
-            int count = 0;
+            int count = 1;
 
-            if((_Root == null) || (target <= 0))
+            if((_Root == null) || (target <= 1))
                 return _Root;
 
             Node node = _Root;
@@ -96,31 +122,7 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
         }
 
 
-        public void DeleteElement(object data)
-        {
-            if (_Root.Data.Equals(data))
-            {
-                if (_Root.Next != null)
-                {
-                    Node oldRoot = _Root;
-                    _Root = oldRoot.Next;
-                }
-                else
-                {
-                    _Root = null;
-                }
-                    
-            }
-                
-            else
-            {
-                //this will essentially erase the node we need to, by moving the rest of the list up by 1 position
-                Node n = FindPreceedingNode(data);
-                Node ne = n.Next.Next;
-                n.Next = ne;
-            }
-            _Size--;
-        }
+
 
         public class Node
         {
