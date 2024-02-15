@@ -10,24 +10,24 @@ using System.Threading.Tasks;
 namespace StephenTechInterviewPack.Custom_Data_Structures.Tests
 {
     [TestClass()]
-    public class StephenSinglyLinkedList_Tests
+    public class StephenCircularlyLinkedList_Tests
     {
         [TestMethod()]
         public void AddElement_Test()
         {
-            StephenSinglyLinkedList stephenSinglyLinkedList = new StephenSinglyLinkedList();
+            StephenCircularlyLinkedList stephenSinglyLinkedList = new StephenCircularlyLinkedList();
 
             stephenSinglyLinkedList.AddElement(1); //int
             stephenSinglyLinkedList.AddElement('a'); //char
             stephenSinglyLinkedList.AddElement(true); //bool
             stephenSinglyLinkedList.AddElement("Test"); //string
-            stephenSinglyLinkedList.AddElement(new string[3] { "1","2","3"}); //array
+            stephenSinglyLinkedList.AddElement(new string[3] { "1", "2", "3" }); //array
         }
 
         [TestMethod()]
         public void DeleteElement_Test()
         {
-            StephenSinglyLinkedList stephenSinglyLinkedList = new StephenSinglyLinkedList();
+            StephenCircularlyLinkedList stephenSinglyLinkedList = new StephenCircularlyLinkedList();
 
             stephenSinglyLinkedList.AddElement(1); //int
             stephenSinglyLinkedList.AddElement('a'); //char
@@ -37,7 +37,7 @@ namespace StephenTechInterviewPack.Custom_Data_Structures.Tests
 
             stephenSinglyLinkedList.DeleteElement(true);
 
-            StephenSinglyLinkedList.Node root = stephenSinglyLinkedList.GetFirstElement;
+            StephenCircularlyLinkedList.Node root = stephenSinglyLinkedList.GetFirstElement;
 
             //although we have this extra step of creating a variable to hold this info - instead of accessing it directly in the FOR loop - this is more efficient, because we arent recalculating what the Size is, every time the loop runs
             int size = stephenSinglyLinkedList.Size;
@@ -56,19 +56,19 @@ namespace StephenTechInterviewPack.Custom_Data_Structures.Tests
         [TestMethod()]
         public void GetElementAt_Test()
         {
-            StephenSinglyLinkedList.Node newNode = new StephenSinglyLinkedList.Node() { Data = 1 };
+            StephenCircularlyLinkedList.Node newNode = new StephenCircularlyLinkedList.Node() { Data = 1 };
 
-            StephenSinglyLinkedList stephenSinglyLinkedList = new StephenSinglyLinkedList();
+            StephenCircularlyLinkedList stephenSinglyLinkedList = new StephenCircularlyLinkedList();
             stephenSinglyLinkedList.AddElement(1); //int
 
-            StephenSinglyLinkedList.Node? node = stephenSinglyLinkedList.GetElementAt(0);
+            StephenCircularlyLinkedList.Node? node = stephenSinglyLinkedList.GetElementAt(0);
             Debug.Assert(node.Data.Equals(newNode.Data));
         }
 
         [TestMethod()]
         public void GetSize_Test()
         {
-            StephenSinglyLinkedList stephenSinglyLinkedList = new StephenSinglyLinkedList();
+            StephenCircularlyLinkedList stephenSinglyLinkedList = new StephenCircularlyLinkedList();
 
             stephenSinglyLinkedList.AddElement(1); //int
             stephenSinglyLinkedList.AddElement('a'); //char
@@ -77,7 +77,8 @@ namespace StephenTechInterviewPack.Custom_Data_Structures.Tests
             stephenSinglyLinkedList.AddElement(new string[3] { "1", "2", "3" }); //array
 
             int i = stephenSinglyLinkedList.Size;
-            Debug.Assert(i >= 4);
+
+            Debug.Assert(i>=4);
             i++;
         }
     }

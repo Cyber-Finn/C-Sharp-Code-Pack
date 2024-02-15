@@ -18,17 +18,22 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
         {
             get
             {
-                if (_Root == null)
-                    return _Root; //we are intentionally passing back _Root - instead of Null, because it saves us the step of creating a new empty Node object (Which also saves some memory and clock-cycles)
+                if (_Root.Next == null)
+                    return _Root;
 
                 //doing an Else statement/check here takes up a clock-cycle, which adds latency.
                 //We know that the program will only ever reach this point if the Root node is not empty
 
                 Node node = _Root;
-                while (node.Next != null)
+                while (node.Next != _Root)
                 {
                     //move the node to the next node in the list
                     node = node.Next;
+
+                    //just an extra check to ensure we exit if there are any breaks in our circular list
+                    if ((node.Next == null))
+                        return null;
+
                 }
                 return node;
             }
@@ -59,6 +64,13 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
 
             if (_Root == null)
                 _Root = n;
+             
+            else if (_Root.Next == null && _Size  == 1)
+            {
+                n.Next = _Root;
+                _Root.Next = n;
+            }
+
             else
             {
                 //link this new node's next node to the Root node in the list (So that it points back to the start [making a circle])
@@ -66,7 +78,6 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
                 //link the last node's Next to the new "last node"
                 GetLastNode.Next = n;
             }
-
             _Size++;
         }
 

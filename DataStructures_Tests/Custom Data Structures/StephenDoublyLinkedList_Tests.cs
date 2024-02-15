@@ -76,7 +76,8 @@ namespace StephenTechInterviewPack.Custom_Data_Structures.Tests
             stephenSinglyLinkedList.AddElement("Test"); //string
             stephenSinglyLinkedList.AddElement(new string[3] { "1", "2", "3" }); //array
 
-            int i = stephenSinglyLinkedList.Size;
+            int i = stephenSinglyLinkedList.Size; 
+            Debug.Assert(i >= 4);
             i++;
         }
     }
