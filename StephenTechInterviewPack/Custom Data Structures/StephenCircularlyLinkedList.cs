@@ -81,7 +81,6 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
             _Size++;
         }
 
-
         public void DeleteElement(object data)
         {
             if (_Root.Data.Equals(data))
@@ -95,6 +94,8 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
                 {
                     _Root = null;
                 }
+
+                _Size--;
             }
 
             else
@@ -102,14 +103,13 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
                 //this will essentially erase the node we need to, by moving the rest of the list up by 1 position
                 Node n = GetPreceedingNode(data);
                 Node ne = new Node();
-                if((n.Next.Next != null) && (!n.Next.Next.Equals(_Root)))
+                if((n.Next.Next != null) && (!n.Next.Next.Equals(_Root)) && (!n.Next.Next.Equals(n)))
                 {
                     ne = n.Next.Next;
+                    n.Next = ne;
+                    _Size--;
                 }
-
-                n.Next = ne;
             }
-            _Size--;
         }
 
 
@@ -143,6 +143,50 @@ namespace StephenTechInterviewPack.Custom_Data_Structures
             return null;
         }
 
+        public void DeleteElementAt(int target)
+        {
+            if (target < 1)
+                target = 1;
+
+            if ((_Root == null))
+            {
+                //do nothing
+            }
+            else
+            {
+                if (target == 1 && _Root.Next == null)
+                {
+                    _Root = null;
+                    _Size--;
+                }
+
+                else if (target == 1 && _Root.Next != null)
+                {
+                    if(_Root.Next.Next == _Root)
+                        _Root.Next.Next = null;
+
+                    _Root = _Root.Next;
+                    _Size--;
+                }
+
+                else
+                    DeleteNode(target);
+            }
+        }
+
+        private void DeleteNode(int indexOfPreceedingNode)
+        {
+            Node n = GetElementAt(indexOfPreceedingNode-1);
+            
+            if ((n != null) && ((n.Next.Next != null) && (!n.Next.Next.Equals(_Root) && (!n.Next.Next.Equals(n)))))
+            {
+                Node ne = new Node();
+                ne = n.Next.Next;
+                n.Next = ne;
+
+                _Size--;
+            }
+        }
 
 
 

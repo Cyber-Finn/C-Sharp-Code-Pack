@@ -61,9 +61,27 @@ namespace StephenTechInterviewPack.Custom_Data_Structures.Tests
             StephenCircularlyLinkedList stephenSinglyLinkedList = new StephenCircularlyLinkedList();
             stephenSinglyLinkedList.AddElement(1); //int
 
-            StephenCircularlyLinkedList.Node? node = stephenSinglyLinkedList.GetElementAt(0);
+            StephenCircularlyLinkedList.Node? node = stephenSinglyLinkedList.GetElementAt(1);
             Debug.Assert(node.Data.Equals(newNode.Data));
         }
+
+        [TestMethod()]
+        public void DeleteElementAt_Test()
+        {
+            StephenCircularlyLinkedList.Node newNode = new StephenCircularlyLinkedList.Node() { Data = 12 };
+
+            StephenCircularlyLinkedList stephenSinglyLinkedList = new StephenCircularlyLinkedList();
+            stephenSinglyLinkedList.AddElement(1); //int
+            stephenSinglyLinkedList.AddElement(12); //int
+
+            stephenSinglyLinkedList.DeleteElementAt(1);
+
+            StephenCircularlyLinkedList.Node? node = stephenSinglyLinkedList.GetElementAt(1);
+
+            Debug.Assert(node.Data.Equals(newNode.Data));
+            Debug.Assert(stephenSinglyLinkedList.Size >= 1);
+        }
+
 
         [TestMethod()]
         public void GetSize_Test()
