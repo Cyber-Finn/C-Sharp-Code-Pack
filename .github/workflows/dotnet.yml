@@ -1,0 +1,32 @@
+name: C# Unit Tests
+
+# handle when we want this to trigger, and on which branch
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+# jobs we're gonna run
+jobs:
+  # the job it's gonna run is to Test our code
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    # these are the steps required for it to test our code
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.x'  # Adjust to your desired .NET version
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Build and Test
+        run: dotnet test --no-restore --verbosity normal
