@@ -79,7 +79,7 @@ namespace StephenTechInterviewPack.Custom_Data_Structures.Tests
             StephenCircularlyLinkedList.Node? node = stephenSinglyLinkedList.GetElementAt(1);
 
             Debug.Assert(node.Data.Equals(newNode.Data));
-            Debug.Assert(stephenSinglyLinkedList.Size >= 1);
+            Debug.Assert(!stephenSinglyLinkedList.Size >= 1);
         }
 
         [TestMethod()]
