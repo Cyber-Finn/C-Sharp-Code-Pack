@@ -82,7 +82,6 @@ namespace StephenTechInterviewPack.Custom_Data_Structures.Tests
             Debug.Assert(stephenSinglyLinkedList.Size >= 1);
         }
 
-
         [TestMethod()]
         public void GetSize_Test()
         {
