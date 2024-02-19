@@ -23,7 +23,7 @@ jobs:
       - name: Set up .NET Core SDK
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '5.x'  # Adjust to your desired .NET version
+          dotnet-version: '8.0.101' # Adjust to our desired .NET version (my app was targeting .net version 8 when I originally built this)
 
       - name: Restore Dependencies
         run: dotnet restore
