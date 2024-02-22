@@ -17,23 +17,22 @@ jobs:
   # environment we want our app to build/run for
     runs-on: [ubuntu-latest, windows-latest]
     #strategy and matrix here lets us create multiple jobs (So we'll actually see 2 jobs when this runs - 1 for each environment)
-    #  after some attempts - and failures - I've come to suspect that this functionality is no longer supported
     #strategy:
       #matrix:
         #OS: [ubuntu-latest, windows-latest]
 
     steps:
-    - name: Check out repository
-    - uses: actions/checkout@v3
-    
-    - name: Set up .NET Core SDK
-    - uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0.101' 
-        
-    - name: Restore dependencies
-    - run: dotnet restore
+      - name: Check out repository
+        uses: actions/checkout@v3
       
-    - name: Build
-    - run: dotnet build --no-restore
+      - name: Set up .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.101' 
+          
+      - name: Restore dependencies
+        run: dotnet restore
+        
+      - name: Build
+        run: dotnet build --no-restore
   # not doing testing here, since it's managed by the other workflow
