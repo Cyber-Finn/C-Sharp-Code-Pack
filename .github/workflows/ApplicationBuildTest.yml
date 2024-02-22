@@ -1,0 +1,38 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Build .NET
+
+on:
+  push:
+    branches: 
+        - master
+  pull_request:
+    branches: 
+        - master
+
+jobs:
+  build:
+    name: Build App for Linux/Windows environments
+  # environment we want our app to build/run for
+    runs-on: [ubuntu-latest, windows-latest]
+    #strategy and matrix here lets us create multiple jobs (So we'll actually see 2 jobs when this runs - 1 for each environment)
+    strategy:
+      matrix:
+        OS: [ubuntu-latest, windows-latest]
+
+    steps:
+    - name: Check out repository
+    - uses: actions/checkout@v3
+    
+    - name: Set up .NET Core SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.101' 
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore
+  # not doing testing here, since it's managed by the other workflow
