@@ -17,9 +17,10 @@ jobs:
   # environment we want our app to build/run for
     runs-on: [ubuntu-latest, windows-latest]
     #strategy and matrix here lets us create multiple jobs (So we'll actually see 2 jobs when this runs - 1 for each environment)
-    strategy:
-      matrix:
-        OS: [ubuntu-latest, windows-latest]
+    #  after some attempts - and failures - I've come to suspect that this functionality is no longer supported
+    #strategy:
+      #matrix:
+        #OS: [ubuntu-latest, windows-latest]
 
     steps:
     - name: Check out repository
