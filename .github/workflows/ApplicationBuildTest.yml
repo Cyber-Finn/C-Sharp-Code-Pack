@@ -14,8 +14,8 @@ on:
 jobs:
   build:
     name: Build App for Linux/Windows environments
-  # environment we want our app to build/run for
-    runs-on: ["ubuntu-latest", "windows-latest"]
+  # environment this job is going to run on
+    runs-on: ubuntu-latest
     #strategy and matrix here lets us create multiple jobs (So we'll actually see 2 jobs when this runs - 1 for each environment)
     strategy:
       matrix:
